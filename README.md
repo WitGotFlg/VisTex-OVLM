@@ -107,7 +107,7 @@ Change default dataset parameter to apply to ODinW or others. The datasets infor
 
 ### Checkpoint Sample and Other Config Details for Reproducing
 ![Table 3](Table3.png)
-Taking “VisTex-GLIP shot2” in Table 3 as an example, we released the following files in the output folder after training ([https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA](https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA) pwd=5lp4), :
+Taking “VisTex-GLIP shot2” in Table 3 as an example, we released the following files in the output folder after training ([https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA](https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA), pwd=5lp4) ：
 1. model_best.pth
 2. training log – records performance scores; in this run, the highest score reached 52, which is higher than the value shown in the table
 3. config file – contains the full parameter set, including defaults
@@ -115,6 +115,7 @@ Taking “VisTex-GLIP shot2” in Table 3 as an example, we released the followi
 
 If you run into issues reproducing our results, first check that your config matches ours. If that doesn’t resolve the problem, the issue is likely with your environment setup. To help with this, we’ve also provided information about the virtual environment, GPU and driver details, and CUDA/CUDNN versions. Normally, aligning the environment is enough, but mismatches—such as an incompatible CUDA and PyTorch version—may still lead to inconsistent results.
 
+The other weights will be released soon.
 
 ## Contributions and Feedback
 
