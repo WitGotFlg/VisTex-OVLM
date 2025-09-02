@@ -94,7 +94,7 @@ python tools/train_net.py \
     IMPROMPT.override_text_prompt False
 ```
 
-###Key Parameters:
+### Key Parameters:
 ```bash
 IMPROMPT.gvl: Main switch (-1 enables VisTex-OVLM, 0 reverts to GLIP)
 IMPROMPT.shot_num: Number of few-shot support images (default=2)
@@ -104,6 +104,18 @@ IMPROMPT.stage_fusion: Stage fusion method ('max' recommended)
 #####
 All parameters are defined in file maskrcnn_benchmark/config/defaults.py. You can find some explaination or clue about how to use the parameters there. If we did not give detail explaination about some parameter, please global search the parameter name in ./maskrcnn_benchmark for analysis.
 Change default dataset parameter to apply to ODinW or others. The datasets information should be defined in maskrcnn_benchmark/config/paths_catalog.py. Modify it after you download the datasets.
+
+### Checkpoint Sample and Other Config Details for Reproducing
+![Table 3](Table3.png)
+Taking “VisTex-GLIP shot2” in Table 3 as an example, we released the following files in the output folder after training ([https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA](https://pan.baidu.com/s/1wPmoNTOWlWAg2IktOwTaMA) pwd=5lp4), :
+1. model_best.pth
+2. training log – records performance scores; in this run, the highest score reached 52, which is higher than the value shown in the table
+3. config file – contains the full parameter set, including defaults
+4. events.out.tfevents – for inspecting loss curves, training duration, and more
+
+If you run into issues reproducing our results, first check that your config matches ours. If that doesn’t resolve the problem, the issue is likely with your environment setup. To help with this, we’ve also provided information about the virtual environment, GPU and driver details, and CUDA/CUDNN versions. Normally, aligning the environment is enough, but mismatches—such as an incompatible CUDA and PyTorch version—may still lead to inconsistent results.
+
+
 ## Contributions and Feedback
 
 We welcome any form of contributions and feedback. If you find any issues or have suggestions for improvement, please report them through GitHub Issues or submit a Pull Request.
