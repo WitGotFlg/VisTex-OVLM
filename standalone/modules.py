@@ -781,7 +781,7 @@ class VLDyHead(nn.Module):
         self.bias0 = nn.Parameter(torch.tensor([-math.log((1 - 0.01) / 0.01)]))
         self.scales = nn.ModuleList([Scale(1.0) for _ in range(5)])
 
-    def forward(self, features, language_dict_features, embedding):
+    def forward(self, features, language_dict_features):
         feat_inputs = {"visual": features, "lang": language_dict_features}
         dyhead_out = self.dyhead_tower(feat_inputs)
 
@@ -855,6 +855,7 @@ def convert_grounding_to_od_logits(logits, num_classes, positive_map):
 
 
 class CellAnchors(nn.Module):
+    """Placeholder anchor buffers, overwritten by checkpoint via load_state_dict."""
     def __init__(self, n):
         super().__init__()
         for i in range(n):
@@ -986,6 +987,8 @@ class ConvMapModule(nn.Module):
         self.fc = nn.Linear(5 * 256 * 7 * 7, 768)
 
     def forward(self, features):
+        assert features[0].shape[0] == 1, (
+            f"ConvMapModule assumes batch_size=1, got {features[0].shape[0]}")
         x1 = self.conv4(self.conv3(self.conv2(self.conv1(features[0]))))
         x2 = self.conv4(self.conv3(self.conv2(features[1])))
         x3 = self.conv4(self.conv3(features[2]))

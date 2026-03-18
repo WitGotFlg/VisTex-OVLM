@@ -101,6 +101,10 @@ def build_positive_map(tokenized):
 
 def mstb_inject(visual_768, positive_map, label, lang_tensor):
     """Place 768-d visual embedding at position after label's last token."""
+    if label not in positive_map:
+        raise KeyError(
+            f"Label {label} not found in positive_map (available: {list(positive_map.keys())}). "
+            "Check that the caption text matches the expected format.")
     next_pos = positive_map[label][-1] + 1
     lang_tensor[:, next_pos, :] = visual_768
 
@@ -205,7 +209,7 @@ def main():
 
         # 5. VLDyHead tower + prediction heads
         logits, bbox_reg, centerness, dot_logits = model.rpn.head(
-            visual_features, lang_dict, lang_dict["hidden"])
+            visual_features, lang_dict)
 
         # 6. Anchors + postprocess
         anchors = model.rpn.anchor_generator(image_sizes, visual_features)
